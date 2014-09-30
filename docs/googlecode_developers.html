@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <title>For Former Google Code Site Developers</title>
+  </head>
+  <body>
+    <div>
+      <h2>if you have no CLs in progress</h2>
+      <ul>
+        <li>Make new clones. Go to <a href="available_repos.html">available repositories</a> to see clone URLs.</li>
+      </ul>
+      <h2>else</h2>
+      <ul>
+        <li>upload.py works the same.</li>
+        <li>Make yourself an account on github.</li>
+        <li>Send your github username to <a href="mailto:plexi@google.com">plexi@google.com</a>.</li>
+        <li>Wait for confirmation.</li>
+        <li>Change git remote repository to those listed in
+          <a href="available_repos.html">available_repositories</a> with this command:
+          <pre>
+            git remote set-url origin https://github.com/googlegsa/&lt;REPO_NAME&gt;.git
+          </pre>
+        </li>
+        <li>Now 'git push' will push your changes to github instead of google code site.</li>
+        <li>If you have any troubles, send emails to <a href="mailto:plexi@google.com">plexi@google.com</a>.</li>
+      </ul>
+    </div>
+  </body>
+</html>
