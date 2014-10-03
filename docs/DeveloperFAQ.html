@@ -41,10 +41,10 @@
       <p>Implement <code>com/google/enterprise/adaptor/PollingIncrementalLister</code> which has a single method <code>getModifiedDocIds(DocIdPusher pusher)</code> . When initializing the Adaptor, register with <code>AdaptorContext.setPollingIncrementalLister(yourLister)</code>.</p>
 
       <p><strong>How do I check if GSA is giving if-modified-since?</strong></p>
-      <p><a href="http://hourly.plexi.googlecode.com/git/javadoc/com/google/enterprise/adaptor/Request.html#hasChangedSinceLastAccess(java.util.Date)">Request.hasChangedSinceLastAccess()</a></p>
+      <p><a href="http://googlegsa.github.io/librarydocshourly/javadoc/com/google/enterprise/adaptor/Request.html#hasChangedSinceLastAccess(java.util.Date)">Request.hasChangedSinceLastAccess()</a></p>
 
       <p><strong>How do I give last-modified time to the GSA?</strong></p>
-      <p><a href="http://hourly.plexi.googlecode.com/git/javadoc/com/google/enterprise/adaptor/Response.html#setLastModified(java.util.Date)">Response.setLastModified()</a></p>
+      <p><a href="http://googlegsa.github.io/librarydocshourly/javadoc/com/google/enterprise/adaptor/Response.html#setLastModified(java.util.Date)">Response.setLastModified()</a></p>
 
       <p><strong>How do I give back a verified identify when writing my own authenticateUser method?</strong></p>
       <p>Use the callback passed to <a href="http://documentation.plexi.googlecode.com/git-history/v4.0.1/javadoc/com/google/enterprise/adaptor/AuthnAuthority.Callback.html#userAuthenticated(com.sun.net.httpserver.HttpExchange,%20com.google.enterprise.adaptor.AuthnIdentity)">authenticateUser()</a> .  This callback will result in sending verified identity information to the GSA via SAML (the SAML is handled by the library). Note that the 2nd argument of this callback is an AuthnIdentity.  The AuthnIdentity is where you can provide the user name and groups which have been verified. Here is an example of an AuthnIdentity that you can provide to the callback:</p>
