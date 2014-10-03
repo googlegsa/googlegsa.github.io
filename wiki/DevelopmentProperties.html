@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>DevelopmentProperties</title>
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+  </head>
+  <body>
+    <div style="max-width: 1024px;">
+      <h1> DevelopmentProperties </h1>
+      <div>
+        <h1> Sweeping guidelines </h1>
+        <ol>
+          <li>Don't introduce code provisionally. Only insert code that is being used for a purpose. Corollary: Develop using vertical slices, instead of horizontal slices.</li>
+          <li>Each CL does one thing. Don't insert refactorings into functional changes and vice-versa.</li>
+          <li>Aim for small CLs.</li>
+          <li>Don't send out "try-things-out" CLs.</li>
+          <li>
+            Make CLs direct and concrete.
+            <ul>
+              <li>no unneccesary indirection; keep hierarchies shallow</li>
+              <li>put String constants directly in code instead of having unnecessary finals declared</li>
+            </ul>
+          </li>
+          <li>Prefer plain/idiomatic/obvious over clever.</li>
+          <li>
+            Name things!
+            <ul>
+              <li>make specific exception classes</li>
+              <li>don't use "abstract" in class name</li>
+              <li>don't use "impl" in class name</li>
+              <li>name sub-blocks of code by converting to methods</li>
+            </ul>
+          </li>
+        </ol>
+
+        <h1> Particular considerations </h1>
+        <ol>
+          <li>Is the code thread safe? Read your code and check whether your code behaves well when multiple methods of an instance are executing simultaneously. Avoid settors to make classes immutable.</li>
+          <li>Was equals considered?</li>
+          <li>Was hashCode considered?</li>
+          <li>Were exceptions considered? Are exceptions scoped precisely and accurately?</li>
+          <li>Was toString considered? toString is helpful for testing and debugging.</li>
+          <li>Does the code call exit? Don't call exit as it makes code un-libifable and means shutdown sequenceing is not understood.</li>
+          <li>Please provide sufficient tests.</li>
+          <li>BufferedImage is TYPE_INT_RGB</li>
+          <li>Gui use done with SwingUtilities.invokeLater () so that SwingUtilities.isEventDispatchThread()</li>
+          <li>Usually if a class uses Random, it is parameterizable on Random</li>
+          <li>Was use of System.out and System.err considered? Be very selective about putting information on these channels. Quite possibly never use them for communicating information.</li>
+          <li>Watch out for autoboxing and varargs producing undesireable behaviour.</li>
+          <li>Consider public and final modifiers on classes and methods.</li>
+          <li>Add javadoc</li>
+        </ol>
+
+        <h1> Detailed Google Java guide </h1>
+        <p><a href="http://google-styleguide.googlecode.com/svn/trunk/javaguide.html">http://google-styleguide.googlecode.com/svn/trunk/javaguide.html</a></p>
+      </div>
+    </div>
+  </body>
+</html>

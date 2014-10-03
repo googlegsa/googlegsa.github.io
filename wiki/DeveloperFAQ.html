@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>DeveloperFAQ</title>
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+  </head>
+  <body>
+    <div style="max-width: 1024px;">
+      <h1> DeveloperFAQ </h1>
+      <p><strong>How should one handle repository being unavailable during init()?</strong></p>
+      <p>
+        It is OK for init() to error if repository is unavailable, as the GsaCommunicationHandler will retry init() using exponential backoff (starting at some seconds and maxing out at an hour) until it is interrupted, shutdown, or successful.
+      </p>
+
+      <p><strong>How do I get a reference to the DocIdPusher?</strong></p>
+      <p>Use AdaptorContext.getDocIdPusher() that you get in init.</p>
+
+      <p><strong>How do I feed document that has changed?</strong></p>
+      <p>Send a Record for that DocId with crawl-immediately being true.</p>
+
+      <p><strong>How do I feed a document that has been deleted?</strong></p>
+      <p>Tell the GSA to crawl the document, which will result in 404, which will result in a deletion. If you'd like you can set delete to be true in Record, but that's not necessary.</p>
+
+      <p><strong>How do I make an ACL?</strong></p>
+      <p>Use Acl.Builder</p>
+
+      <p><strong>I'm getting interruption exception, what am I doing wrong?</strong></p>
+      <p>The adaptor has 30 seconds to start sending content, and 3 minutes to complete sending content. The config values are adaptor.docContentTimeoutSecs and adaptor.docHeaderTimeoutSecs.</p>
+
+      <p><strong>My adaptor freezes!</strong></p>
+      <p>Windows users need JRE 1.7u6 or higher (earlier versions freeze).</p>
+
+      <p><strong>My adaptor has a memory leak!</strong></p>
+      <p>All users need at least JRE 1.6u27 or higher (earlier versions have a memory leak).</p>
+
+      <p><strong>I'm seeing the same config name appear twice in dashboard?</strong></p>
+      <p>Please double check that you don't have a Unicode invisible space character, that maybe was copied from a webpage or was inserted at the beginning of the file by your text editor, in your config name.</p>
+
+      <p><strong>I have an existing Adaptor that provides full data pushes - how do I make it support incremental pushes?</strong></p>
+      <p>Implement <code>com/google/enterprise/adaptor/PollingIncrementalLister</code> which has a single method <code>getModifiedDocIds(DocIdPusher pusher)</code> . When initializing the Adaptor, register with <code>AdaptorContext.setPollingIncrementalLister(yourLister)</code>.</p>
+
+      <p><strong>How do I check if GSA is giving if-modified-since?</strong></p>
+      <p><a href="http://hourly.plexi.googlecode.com/git/javadoc/com/google/enterprise/adaptor/Request.html#hasChangedSinceLastAccess(java.util.Date)">Request.hasChangedSinceLastAccess()</a></p>
+
+      <p><strong>How do I give last-modified time to the GSA?</strong></p>
+      <p><a href="http://hourly.plexi.googlecode.com/git/javadoc/com/google/enterprise/adaptor/Response.html#setLastModified(java.util.Date)">Response.setLastModified()</a></p>
+
+      <p><strong>How do I give back a verified identify when writing my own authenticateUser method?</strong></p>
+      <p>Use the callback passed to <a href="http://documentation.plexi.googlecode.com/git-history/v4.0.1/javadoc/com/google/enterprise/adaptor/AuthnAuthority.Callback.html#userAuthenticated(com.sun.net.httpserver.HttpExchange,%20com.google.enterprise.adaptor.AuthnIdentity)">authenticateUser()</a> .  This callback will result in sending verified identity information to the GSA via SAML (the SAML is handled by the library). Note that the 2nd argument of this callback is an AuthnIdentity.  The AuthnIdentity is where you can provide the user name and groups which have been verified. Here is an example of an AuthnIdentity that you can provide to the callback:</p>
+      <pre>
+        <code>     
+          AuthnIdentity identity = new AuthnIdentity() {
+
+            @Override
+            public UserPrincipal getUser() {
+              return user;
+            }
+
+            @Override
+            public String getPassword() {
+              return null;
+            }
+
+            @Override
+            public Set&lt;GroupPrincipal&gt; getGroups() {
+              return groups;
+            }
+          };
+        </code>
+      </pre>
+    </div>
+  </body>
+</html>
