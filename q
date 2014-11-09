@@ -83,11 +83,11 @@
         </tr>
       </tbody>
     </table>
-    
-     
-    <p></p>
 
 
+    <p>
+
+    </p>
     <table style="border: 1px solid gray; border-collapse: collapse;">
       <thead>
         <th> Windows Installer </th>
@@ -124,10 +124,6 @@
     </table>
 
 
-
-
-
-
     <h2> Product Admininistration Guides </h2>
     <table style="border: 1px solid gray; border-collapse: collapse;">
       <thead>
@@ -149,6 +145,7 @@
 <td> &nbsp; &nbsp;
 <a href="http://static.googleusercontent.com/media/www.google.com/en/us/support/enterprise/static/gsa/docs/admin/connectors/40/pdf/AdministrationGuideforGoogleConnectors4.0.3.pdf">Common V4 Admin Guide</a>
 </td>
+
         </tr>
         <tr bgcolor=d8d8f7>
           <td> Microsoft SharePoint User Profiles </td>
@@ -162,6 +159,7 @@
 <td> &nbsp; &nbsp;
 <a href="http://static.googleusercontent.com/media/www.google.com/en/us/support/enterprise/static/gsa/docs/admin/connectors/40/pdf/AdministrationGuideforGoogleConnectors4.0.3.pdf">Common V4 Admin Guide</a>
 </td>
+
         </tr>
         <tr bgcolor=c1f0c1>
           <td> Microsoft Windows Shares </td>
@@ -175,6 +173,7 @@
 <td> &nbsp; &nbsp;
 <a href="http://static.googleusercontent.com/media/www.google.com/en/us/support/enterprise/static/gsa/docs/admin/connectors/40/pdf/AdministrationGuideforGoogleConnectors4.0.3.pdf">Common V4 Admin Guide</a>
 </td>
+
         </tr>
         <tr bgcolor=d8d8f7>
           <td> Microsoft Active Directory </td>
@@ -188,14 +187,10 @@
 <td> &nbsp; &nbsp;
 <a href="http://static.googleusercontent.com/media/www.google.com/en/us/support/enterprise/static/gsa/docs/admin/connectors/40/pdf/AdministrationGuideforGoogleConnectors4.0.3.pdf">Common V4 Admin Guide</a>
 </td>
+
         </tr>
       </tbody>
     </table>
-
-    <br>
-    <br>
-    <br>
-
 
 
     <h2> Instructions for developing your own Adaptor </h2>
@@ -204,13 +199,14 @@
       </li>
       <li>Unzip the downloaded library zip<br>
       </li>
-      <li>Start going through the <a href="https://googlegsa.github.io/librarydocsreleased/4.0.3/lib/index.html">latest release's documentation</a></li>
+      <li>Start going through the <a href="https://googlegsa.github.io/librarydocsreleased/4.0.3/lib/index.html">latest release's documentation</a>.</li>
     </ul>
     <p>You will need:<br></p>
     <ul>
-      <li>a GSA version 7.2 or higher<br>
+      <li>a 7.2 GSA<br>
       </li>
-      <li>JDK 1.7u6 or higher (earlier versions <a href="http://bugs.sun.com/view_bug.do?bug_id=6346658">freeze</a> and <a href="http://bugs.sun.com/view_bug.do?bug_id=6946825">leak memory</a>).</li>
+      <li>an appropriate JRE. Windows users need JRE 1.7u6 or higher (earlier versions <a href="http://bugs.sun.com/view_bug.do?bug_id=6346658">freeze</a>)
+        where other users need JRE 1.6u27 or higher (earlier versions have a <a href="http://bugs.sun.com/view_bug.do?bug_id=6946825">memory leak</a>).</li>
     </ul>
     Links:<br>
     </p>
@@ -238,7 +234,7 @@
     </ul>
 
 
-    <h2> Info for developers of the common library </h2>
+    <h2> Info for developers of the Adaptor Library </h2>
     <p>Source of this project is available from
       <a href="https://github.com/googlegsa/library">a git repository hosted on github</a>
     </p>
