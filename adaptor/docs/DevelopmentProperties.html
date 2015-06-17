@@ -44,11 +44,15 @@
           <li>Was <code>hashCode</code> considered?</li>
           <li>Were exceptions considered? Are exceptions scoped precisely and accurately?</li>
           <li>Was <code>toString</code> considered? <code>toString<c/ode> is helpful for testing and debugging.</li>
-          <li>Does the code call <code>exit</code>? Don't call <code>exit</code> as it makes prevents code from being able to made into a library as well as no longer having an understood shutdown sequence.</li>
+          <li>Does the code call <code>exit</code>? Don't call <code>exit</code> as it prevents code from being made into a library as well as no longer having an understood shutdown sequence.</li>
           <li>Please provide sufficient tests.</li>
           <li>BufferedImage is <code>TYPE_INT_RGB</code>.</li>
-          <li>Gui code should be done with <code>SwingUtilities.invokeLater()</code> so that <code>SwingUtilities.isEventDispatchThread()</code> returns <code>true</code>.</li>
-          <li>if a class uses <code>Random</code>, use the <code>Random(long seed)</code> constructor.</li>
+          <li>Gui code should be done with <code>SwingUtilities.invokeLater()</code> such that <code>SwingUtilities.isEventDispatchThread()</code> returns <code>true</code>.</li>
+          <li>If a class uses <code>Random</code>, have the instance of <code>Random</code> passed into the class constructor or <code>init</code> method, rather than the class creating its own instance of <code>Random</code>.</li>
+            <ul>
+              <li>This allows the class to be tested with repeatable results</li>
+            </ul>
+
           <li>Was use of <code>System.out</code> and <code>System.err</code> considered? Be very selective about putting information on these channels. Quite possibly never use them for communicating information.</li>
           <li>Watch out for autoboxing and varargs producing undesirable behavior.</li>
           <li>Consider <code>public</code> and <code>final</code> modifiers on classes and methods.</li>
@@ -61,54 +65,3 @@
     </div>
   </body>
 </html>
--------------------
---- a/adaptor/docs/DevelopmentProperties.html
-+++ b/adaptor/docs/DevelopmentProperties.html
-@@ -11,14 +11,17 @@
-       <div>
-         <h1> Sweeping guidelines </h1>
-         <ol>
--          <li>Don't introduce code provisionally. Only insert code that is being used for a purpose. Corollary: Develop using vertical slices, instead of horizontal slices.</li>
-           <li>Each CL does one thing. Don't insert refactorings into functional changes and vice-versa.</li>
-           <li>Aim for small CLs.</li>
-           <li>Don't send out "try-things-out" CLs.</li>
-           <li>
-             Make CLs direct and concrete.
-             <ul>
--              <li>no unneccesary indirection; keep hierarchies shallow</li>
-+              <li>no unneccessary indirection; keep hierarchies shallow</li>
-               <li>put String constants directly in code instead of having unnecessary finals declared</li>
-             </ul>
-           </li>
-@@ -36,20 +39,20 @@
- 
-         <h1> Particular considerations </h1>
-         <ol>
--          <li>Is the code thread safe? Read your code and check whether your code behaves well when multiple methods of an instance are executing simultaneously. Avoid settors to make classes immutable.</li>
--          <li>Was equals considered?</li>
--          <li>Was hashCode considered?</li>
-+          <li>Is the code thread safe? Read your code and check whether your code behaves well when multiple methods of an instance are executing simultaneously. Avoid setters to make classes immutable.</li>
-+          <li>Was <code>equals</code> considered?</li>
-+          <li>Was <code>hashCode</code> considered?</li>
-           <li>Were exceptions considered? Are exceptions scoped precisely and accurately?</li>
--          <li>Was toString considered? toString is helpful for testing and debugging.</li>
--          <li>Does the code call exit? Don't call exit as it makes code un-libifable and means shutdown sequenceing is not understood.</li>
-+          <li>Was <code>toString</code> considered? <code>toString<c/ode> is helpful for testing and debugging.</li>
-+          <li>Does the code call <code>exit</code>? Don't call <code>exit</code> as it makes prevents code from being able to made into a library as well as no longer having an understood shutdown sequence.</li>
-           <li>Please provide sufficient tests.</li>
--          <li>BufferedImage is TYPE_INT_RGB</li>
--          <li>Gui use done with SwingUtilities.invokeLater () so that SwingUtilities.isEventDispatchThread()</li>
--          <li>Usually if a class uses Random, it is parameterizable on Random</li>
--          <li>Was use of System.out and System.err considered? Be very selective about putting information on these channels. Quite possibly never use them for communicating information.</li>
--          <li>Watch out for autoboxing and varargs producing undesireable behaviour.</li>
--          <li>Consider public and final modifiers on classes and methods.</li>
--          <li>Add javadoc</li>
-+          <li>BufferedImage is <code>TYPE_INT_RGB</code>.</li>
-+          <li>Gui code should be done with <code>SwingUtilities.invokeLater()</code> so that <code>SwingUtilities.isEventDispatchThread()</code> returns <code>true</code>.</li>
-+          <li>if a class uses <code>Random</code>, use <code>Random(long seed)</code>.</li>
-+          <li>Was use of <code>System.out</code> and <code>System.err</code> considered? Be very selective about putting information on these channels. Quite possibly never use them for communicating information.</li>
-+          <li>Watch out for autoboxing and varargs producing undesirable behavior.</li>
-+          <li>Consider <code>public</code> and <code>final</code> modifiers on classes and methods.</li>
-+          <li>Add javadoc.</li>
-         </ol>
-
