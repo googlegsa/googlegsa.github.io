@@ -12,7 +12,57 @@
         <h1> <a id="CommandsToProduceNewReleases"></a> Commands to produce new releases </h1>
         <p><strong>Note: These command sequences are not scripts.</strong></p>
         <p><strong>Note: These command sequences are intended to be performed manually while being aware of what is happening and noticing errors and adjusting appropriately.</strong></p>
-        <p><strong>Note: Ensure you're using appropriate versions of JDK.</strong></p>
+        <p><strong>Note: Ensure you're using appropriate versions of JDK (<a href="http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase6-419409.html">JDK 6</a> for the Library; JDK 7 for the Adaptors).</strong></br>
+        As of release v4.1.1, four of the Adaptors do <strong>require</strong> JDK 7:</p>
+       <table style="border: 1px solid gray; padding: 5px;">
+         <thead>
+           <th> Component </th>
+           <th> Minimum Supported JDK </th>
+           <th> JDK used to build release </th>
+         </thead>
+         <tbody>
+           <tr bgcolor=c1f0c1>
+             <td> <a href="https://github.com/googlegsa/library">Adaptor library</a> </td>
+             <td align="center"> 6.0 </td>
+             <td align="center"> 6.0 </td>
+           </tr>
+           <tr bgcolor=d8d8f7>
+             <td> <a href="https://github.com/googlegsa/activedirectory">Active Directory</a> </td>
+             <td align="center"> 6.0 </td>
+             <td align="center"> 7.0 </td>
+           </tr>
+           <tr bgcolor=c1f0c1>
+             <td> <a href="https://github.com/googlegsa/database">Database</a> </td>
+             <td align="center"> 7.0 </td>
+             <td align="center"> 7.0 </td>
+           </tr>
+           <tr bgcolor=d8d8f7>
+             <td> <a href="https://github.com/googlegsa/documentum">Documentum</a> </td>
+             <td align="center"> 7.0 </td>
+             <td align="center"> 7.0 </td>
+           </tr>
+           <tr bgcolor=c1f0c1>
+             <td> <a href="https://github.com/googlegsa/filesystem">File System</a> </td>
+             <td align="center"> 7.0 </td>
+             <td align="center"> 7.0 </td>
+           </tr>
+           <tr bgcolor=d8d8f7>
+             <td> <a href="https://github.com/googlegsa/ldap">Ldap</a> </td>
+             <td align="center"> 6.0 </td>
+             <td align="center"> 7.0 </td>
+           </tr>
+           <tr bgcolor=c1f0c1>
+             <td> <a href="https://github.com/googlegsa/opentext">Open Text</a> </td>
+             <td align="center"> 7.0 </td>
+             <td align="center"> 7.0 </td>
+           </tr>
+           <tr bgcolor=d8d8f7>
+             <td> <a href="https://github.com/googlegsa/sharepoint">SharePoint &amp; SharePoint User Profiles</a> </td>
+             <td align="center"> 6.0 </td>
+             <td align="center"> 7.0 </td>
+           </tr>
+         </tbody>
+       </table>
         <ul>
           <li> <a href="#CommandsToProduceNewReleases">Commands to produce new releases</a> 
             <ul>
