@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Known Issues</title>
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+  </head>
+  <body>
+    <div style="max-width: 1024px;">
+      <h1>Known Issues</h1>
+      <p><a name="ia-java8">36075571:</a> <strong>Installer reports "Windows error 2 occurred while loading Java VM"</strong></p>
+      <p>
+        Running an installer for connector versions 4.1.2 and earlier might get this error on Windows Server 2012 R2 with recent versions of Java 8. This is caused by the presence of "C:\ProgramData\Oracle\Java\javapath" in the system environment variable PATH.
+      </p>
+      <p>Workaround: Run the installer from a command prompt with the LAX_VM flag and the full path to <tt>java.exe</tt>. For example:
+      </p>
+      <blockquote><tt>
+          documentum-install-4.1.2.exe LAX_VM "C:\Program Files\Java\jdk1.8.0_101\bin\java.exe"
+      </tt></blockquote>
+    </div>
+  </body>
+</html>
