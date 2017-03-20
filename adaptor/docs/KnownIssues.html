@@ -10,8 +10,13 @@
       <h1>Known Issues</h1>
       <p><a name="ia-java8">36075571:</a> <strong>Installer reports "Windows error 2 occurred while loading Java VM"</strong></p>
       <p>
-        Running an installer for connector versions 4.1.2 and earlier might get this error on Windows Server 2012 R2 with recent versions of Java 8. This is caused by the presence of "C:\ProgramData\Oracle\Java\javapath" in the system environment variable PATH.
+        Running an installer for connector versions 4.1.2 and earlier might get this error with Java 8 Update 60 or later. This is caused by an incompatibility with the presence of "C:\ProgramData\Oracle\Java\javapath" in the system environment variable PATH.
       </p>
+      <p>Versions affected:</p>
+      <ul>
+        <li>Versions 4.1.1 and earlier with Java 8 Update 60 or later
+        <li>Version 4.1.2 with Java 8 Update 112 or later
+      </ul>
       <p>Workaround: Run the installer from a command prompt with the LAX_VM flag and the full path to <tt>java.exe</tt>. For example:
       </p>
       <blockquote><tt>
