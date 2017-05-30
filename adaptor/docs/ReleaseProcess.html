@@ -67,10 +67,10 @@
           <li> <a href="#CommandsToProduceNewReleases">Commands to produce new releases</a> 
             <ul>
               <li> <a href="#CreateReleaseBranch">Create release branch</a> </li>
-              <li> <a href="#TagVersion">Tag version</a> </li>
               <li> <a href="#BuildRcOfLibrary">Build RC of library</a> </li>
               <li> <a href="#ExtractDocumentationZip">Extract documentation zip from full distribution zip</a> </li>
               <li> <a href="#BuildRcOfAdaptor">Build RC of adaptor</a> </li>
+              <li> <a href="#Release">Release library or adaptor</a> </li>
             </ul>
           </li>
         </ul>
@@ -78,7 +78,7 @@
         <h3> <a id="CreateReleaseBranch"></a> Create release branch </h3>
         <pre>
           <code>
-            BRANCH=v4.0.x
+            BRANCH=v4.1.x
 
             # Make sure local code is up-to-date
             git checkout master
@@ -96,26 +96,27 @@
             git branch $BRANCH origin/$BRANCH
           </code>
         </pre>
-        <h3> <a id="TagVersion"></a> Tag version </h3>
-        <pre>
-          <code>
-            VERSION=0.90
-
-            cd pre-existing-plexi/
-            git checkout origin/master # the commit we are going to tag
-            git tag -a v$VERSION -m "Version $VERSION"
-            git push --tags
-          </code>
-        </pre>
 
         <h3> <a id="BuildRcOfLibrary"></a> Build RC of library </h3>
         <pre>
           <code>
+            VERSION=4.1.2
+
+            # Get a new clone.
             cd ~
-            git clone https://github.com/googlegsa/library
-            cd plexi
-            git checkout v$VERSION
-            ant -Dadaptorlib.suffix=-$VERSION dist
+            git clone https://github.com/googlegsa/library library-$VERSION
+            cd library-$VERSION
+            git checkout $BRANCH
+
+            # Update the branch, if releases are from master, to the
+            # commit for this RC build.
+            git merge --ff-only origin/master
+
+            # Tag the new version. Do NOT push the tag. <a id="TagVersion"></a>
+            git tag -a v$VERSION -m "Version $VERSION"
+
+            # Build the distribution.
+            ant dist
           </code>
         </pre>
 
@@ -130,21 +131,37 @@
         <h3> <a id="BuildRcOfAdaptor"></a> Build RC of adaptor </h3>
         <pre>
           <code>
-            VERSION=0.90
-
-            # Tag version
+            ADAPTOR=database
+            VERSION=4.1.2
 
             # Have adaptor library
-            # eg: cd ~/plexi/dist
+            # eg: cd ~/library-$VERSION/dist
             # unzip adaptor-$VERSION-bin.zip adaptor-$VERSION-withlib.jar
 
-            # Build adaptor from fresh clone
+            # Get a new clone. Do NOT run "git submodule" commands here.
             cd ~
-            git clone https://github.com/googlegsa/ADAPTOR_REPO
-            cd ADAPTOR_REPO
-            git checkout v$VERSION
-            cp ../plexi/dist/adaptor-$VERSION-withlib.jar lib/
-            ant -Dadaptor.suffix=-$VERSION -Dadaptor.jar=lib/adaptor-$VERSION-withlib.jar dist
+            git clone https://github.com/googlegsa/$ADAPTOR $ADAPTOR-$VERSION
+            cd $ADAPTOR-$VERSION
+            git checkout $BRANCH
+
+            # Update the branch, if releases are from master, to the
+            # commit for this RC build.
+            git merge --ff-only origin/master
+
+            # Tag the new version. Do NOT push the tag.
+            git tag -a v$VERSION -m "Version $VERSION"
+
+            # Build the distribution.
+            cp ../library-$VERSION/dist/adaptor-$VERSION-withlib.jar lib/
+            ant -Dadaptor.jar=lib/adaptor-$VERSION-withlib.jar dist
+          </code>
+        </pre>
+
+        <h3> <a id="Release"></a> Release the library or adaptor </h3>
+        <pre>
+          <code>
+            # Push the branch and tag.
+            git push $BRANCH v$VERSION
           </code>
         </pre>
 
