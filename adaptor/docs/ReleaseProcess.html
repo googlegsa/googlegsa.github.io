@@ -9,70 +9,100 @@
     <div style="max-width: 1024px;">
       <h1> ReleaseProcess </h1>
       <div>
-        <h1> <a id="CommandsToProduceNewReleases"></a> Commands to produce new releases </h1>
-        <p><strong>Note: These command sequences are not scripts.</strong></p>
-        <p><strong>Note: These command sequences are intended to be performed manually while being aware of what is happening and noticing errors and adjusting appropriately.</strong></p>
-        <p><strong>Note: Ensure you're using appropriate versions of JDK (<a href="http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase6-419409.html">JDK 6</a> for the Library; JDK 7 for the Adaptors).</strong></br>
-        As of release v4.1.1, four of the Adaptors do <strong>require</strong> JDK 7:</p>
+        <h3>Ensure you're using appropriate versions of the JDK or setting the bootclasspath</h3>
+
+        <p>Check the <a href="http://www.oracle.com/technetwork/java/archive-139210.html">Oracle Java Archive</a> if you need older versions of the JDK.<br>
+
+        <p>If you set the <code>build.bootclasspath</code> Ant property
+        either on the command line, or more commonly, in a
+        <code>build.properties</code> file in each repository root
+        directory, then you can safely build all components with JDK 8
+        or later. For example:</p>
+
+        <pre>
+          # JDK 7 bootclasspath.
+          jdk7.home = <em>&lt;path to JDK 7&gt;</em>
+          build.bootclasspath = ${jdk7.home}/jre/lib/rt.jar\
+              :${jdk7.home}/jre/lib/jsse.jar\
+              :${jdk7.home}/jre/lib/jce.jar</pre>
+
+        <p>If you do not set the <code>build.bootclasspath</code>
+        Ant property, you will get a warning from <code>javac</code>:</p>
+
+        <pre>
+          warning: [options] bootstrap class path not set in conjunction with -source 1.7</pre>
+
+        <p><strong>Note:</strong> If you use a later JDK without
+        setting <code>build.bootclasspath</code>, or if you specify
+        the wrong JDK version in <code>build.bootclasspath</code>, the
+        potential errors are very difficult to detect. The class file
+        versions will be correct, but the code may not run reliably on
+        the desired version of the JVM, and the failures may happen at
+        any time.</p>
+
        <table style="border: 1px solid gray; padding: 5px;">
          <thead>
-           <th> Component </th>
-           <th> Minimum Supported JDK </th>
-           <th> JDK used to build release </th>
+           <tr>
+             <th rowspan="2" style="vertical-align: top"> Component </th>
+             <th> Minimum Supported JDK </th>
+             <th> JDK used to build release </th>
+           </tr>
+           <tr>
+             <td align="center"> javac source </td>
+             <td align="center"> javac target </td>
+           </tr>
          </thead>
          <tbody>
            <tr bgcolor=c1f0c1>
-             <td> <a href="https://github.com/googlegsa/library">Adaptor library</a> </td>
-             <td align="center"> 6.0 </td>
-             <td align="center"> 6.0 </td>
+             <td> <a href="https://github.com/googlegsa/library">Adaptor Library</a> </td>
+             <td align="center"> 6 </td>
+             <td align="center"> 6 </td>
            </tr>
            <tr bgcolor=d8d8f7>
              <td> <a href="https://github.com/googlegsa/activedirectory">Active Directory</a> </td>
-             <td align="center"> 6.0 </td>
-             <td align="center"> 7.0 </td>
+             <td align="center"> 6 </td>
+             <td align="center"> 7 </td>
            </tr>
            <tr bgcolor=c1f0c1>
              <td> <a href="https://github.com/googlegsa/database">Database</a> </td>
-             <td align="center"> 7.0 </td>
-             <td align="center"> 7.0 </td>
+             <td align="center"> 7 </td>
+             <td align="center"> 7 </td>
            </tr>
            <tr bgcolor=d8d8f7>
              <td> <a href="https://github.com/googlegsa/documentum">Documentum</a> </td>
-             <td align="center"> 7.0 </td>
-             <td align="center"> 7.0 </td>
+             <td align="center"> 7 </td>
+             <td align="center"> 7 </td>
            </tr>
            <tr bgcolor=c1f0c1>
              <td> <a href="https://github.com/googlegsa/filesystem">File System</a> </td>
-             <td align="center"> 7.0 </td>
-             <td align="center"> 7.0 </td>
+             <td align="center"> 7 </td>
+             <td align="center"> 7 </td>
            </tr>
            <tr bgcolor=d8d8f7>
-             <td> <a href="https://github.com/googlegsa/ldap">Ldap</a> </td>
-             <td align="center"> 6.0 </td>
-             <td align="center"> 7.0 </td>
+             <td> <a href="https://github.com/googlegsa/ldap">LDAP</a> </td>
+             <td align="center"> 6 </td>
+             <td align="center"> 7 </td>
            </tr>
            <tr bgcolor=c1f0c1>
-             <td> <a href="https://github.com/googlegsa/opentext">Open Text</a> </td>
-             <td align="center"> 7.0 </td>
-             <td align="center"> 7.0 </td>
+             <td> <a href="https://github.com/googlegsa/opentext">OpenText</a> </td>
+             <td align="center"> 7 </td>
+             <td align="center"> 7 </td>
            </tr>
            <tr bgcolor=d8d8f7>
              <td> <a href="https://github.com/googlegsa/sharepoint">SharePoint &amp; SharePoint User Profiles</a> </td>
-             <td align="center"> 6.0 </td>
-             <td align="center"> 7.0 </td>
+             <td align="center"> 6 </td>
+             <td align="center"> 7 </td>
            </tr>
          </tbody>
        </table>
+
+        <h1> <a id="CommandsToProduceNewReleases"></a> Commands to produce new releases </h1>
         <ul>
-          <li> <a href="#CommandsToProduceNewReleases">Commands to produce new releases</a> 
-            <ul>
               <li> <a href="#CreateReleaseBranch">Create release branch</a> </li>
               <li> <a href="#BuildRcOfLibrary">Build RC of library</a> </li>
               <li> <a href="#ExtractDocumentationZip">Extract documentation zip from full distribution zip</a> </li>
               <li> <a href="#BuildRcOfAdaptor">Build RC of adaptor</a> </li>
               <li> <a href="#Release">Release library or adaptor</a> </li>
-            </ul>
-          </li>
         </ul>
 
         <h3> <a id="CreateReleaseBranch"></a> Create release branch </h3>
@@ -115,6 +145,9 @@
             # Tag the new version. Do NOT push the tag. <a id="TagVersion"></a>
             git tag -a v$VERSION -m "Version $VERSION"
 
+            # Copy or create build.properties.
+            cp ../library/build.properties .
+
             # Build the distribution.
             ant dist
           </code>
@@ -151,11 +184,18 @@
             # Tag the new version. Do NOT push the tag.
             git tag -a v$VERSION -m "Version $VERSION"
 
+            # Copy or create build.properties.
+            cp ../$ADAPTOR/build.properties .
+
             # Build the distribution.
             cp ../library-$VERSION/dist/adaptor-$VERSION-withlib.jar lib/
             ant -Dadaptor.jar=lib/adaptor-$VERSION-withlib.jar dist
           </code>
         </pre>
+
+        <p><strong>Note:</strong> It is possible to reuse this directory
+        for subsequent RC builds, by leaving out some steps and altering
+        others, but that is not recommended or documented.</p>
 
         <h3> <a id="Release"></a> Release the library or adaptor </h3>
         <pre>
