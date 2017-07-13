@@ -211,6 +211,10 @@
 
         <h3> <a id="Release"></a> Release the library or adaptor </h3>
         <p>Push the branch and tag to GitHub.</p>
+        <p><strong>Note:</strong> If you no longer have the clone used
+        to create the branch and tag for the RC build, you can recreate
+        the branch and tag in a new clone, and then proceed with this
+        step.</p>
         <pre>
           <code>
             # Release branch names start with "v" and end in "x".
@@ -221,11 +225,13 @@
             git push -u origin $BRANCH v$VERSION
           </code>
         </pre>
-        <p>Add a new release on GitHub, using the new tag. Use a release
-        title of "Version $VERSION", and use one of the following
+        <p>On the <a href="https://help.github.com/articles/creating-releases/">
+        Releases page</a> of the GitHub repository UI, click "Draft a
+        new release". Select the new tag for the version, use "Version
+        $VERSION" for the release title, and use one of the following
         snippets Markdown for the description, manually substituting the
-        shell variables in both cases. Edit the MD5 checksums below.
-        Upload the files mentioned in the description.</p>
+        shell variables in both cases. Edit the MD5 checksums in the
+        description below and upload the corresponding files.</p>
         <h4>Markdown for library</h4>
         <pre><code>[Documentation](https://support.google.com/gsa/topic/4566684)
 [API Documentation](https://googlegsa.github.io/librarydocsreleased/$VERSION/lib/index.html)
