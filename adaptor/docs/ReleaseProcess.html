@@ -106,8 +106,10 @@
         </ul>
 
         <h3> <a id="CreateReleaseBranch"></a> Create release branch </h3>
+        <p>This step is performed only for .0 releases, e.g., 4.1.0.</p>
         <pre>
           <code>
+            # Release branch names start with "v" and end in "x".
             BRANCH=v4.1.x
 
             # Make sure local code is up-to-date
@@ -130,6 +132,8 @@
         <h3> <a id="BuildRcOfLibrary"></a> Build RC of library </h3>
         <pre>
           <code>
+            # Release branch names start with "v" and end in "x".
+            BRANCH=v4.1.x
             VERSION=4.1.2
 
             # Get a new clone.
@@ -153,6 +157,9 @@
           </code>
         </pre>
 
+        <p><strong>Note:</strong> Keep this clone until a subsequent
+        RC is built, or the release is published.</p>
+
         <h3> <a id="ExtractDocumentationZip"></a> Extract documentation zip from full distribution zip </h3>
         <pre>
           <code>
@@ -164,7 +171,9 @@
         <h3> <a id="BuildRcOfAdaptor"></a> Build RC of adaptor </h3>
         <pre>
           <code>
+            # Release branch names start with "v" and end in "x".
             ADAPTOR=database
+            BRANCH=v4.1.x
             VERSION=4.1.2
 
             # Have adaptor library
@@ -193,17 +202,51 @@
           </code>
         </pre>
 
+        <p><strong>Note:</strong> Keep this clone until a subsequent
+        RC is built, or the release is published.</p>
+
         <p><strong>Note:</strong> It is possible to reuse this directory
         for subsequent RC builds, by leaving out some steps and altering
         others, but that is not recommended or documented.</p>
 
         <h3> <a id="Release"></a> Release the library or adaptor </h3>
+        <p>Push the branch and tag to GitHub.</p>
+        <p><strong>Note:</strong> If you no longer have the clone used
+        to create the branch and tag for the RC build, you can recreate
+        the branch and tag in a new clone, and then proceed with this
+        step.</p>
         <pre>
           <code>
+            # Release branch names start with "v" and end in "x".
+            BRANCH=v4.1.x
+            VERSION=4.1.2
+
             # Push the branch and tag.
-            git push $BRANCH v$VERSION
+            git push -u origin $BRANCH v$VERSION
           </code>
         </pre>
+        <p>On the <a href="https://help.github.com/articles/creating-releases/">
+        Releases page</a> of the GitHub repository UI, click "Draft a
+        new release". Select the new tag for the version, use "Version
+        $VERSION" for the release title, and use one of the following
+        snippets Markdown for the description, manually substituting the
+        shell variables in both cases. Edit the MD5 checksums in the
+        description below and upload the corresponding files.</p>
+        <h4>Markdown for library</h4>
+        <pre><code>[Documentation](https://support.google.com/gsa/topic/4566684)
+[API Documentation](https://googlegsa.github.io/librarydocsreleased/$VERSION/lib/index.html)
+
+| Downloads File | MD5 Checksum |
+| --- | --- |
+| adaptor-$VERSION-bin.zip | abc...xyz |
+| adaptor-$VERSION-withlib.jar | def...123 |</code></pre>
+        <h4>Markdown for adaptor</h4>
+        <pre><code>[Documentation](https://support.google.com/gsa/topic/4566684)
+
+| Downloads File | MD5 Checksum |
+| --- | --- |
+| adaptor-$ADAPTOR-$VERSION-withlib.jar | abc...xyz |
+| $ADAPTOR-install-$VERSION.exe | def...123 |</code></pre>
 
         <!--
 <wiki:comment>
